@@ -35,8 +35,8 @@ if ($stmt = $mysqli->prepare("SELECT user_comment, username, DATE_FORMAT(ts, '%h
 	if($stmt->num_rows > 0){
 		echo "<hr>";
 		while($stmt->fetch()){
-			echo "<p>$user, $ts </p>";
-			echo "$comment </br></br>";
+			echo "<p>$user, $ts: </p>";
+			echo "$comment </br>";
 			echo "<hr>";
 		}
 		
@@ -50,7 +50,8 @@ if ($stmt = $mysqli->prepare("SELECT user_comment, username, DATE_FORMAT(ts, '%h
 if(isset($_GET["username"])){
 	if(isset($_POST["comments"]) && !empty($_POST["comments"])){
 		if($stmt = $mysqli->prepare("INSERT INTO comments (event_id, username, user_comment) VALUES(?, ?, ?)")){
-			$stmt->bind_param('sss', $_GET['eventID'], $_GET['username'], $_POST['comments']);
+			$comment = htmlspecialchars($_POST['comments']);
+			$stmt->bind_param('sss', $_GET['eventID'], $_GET['username'], $comment);
 			$stmt->execute();
 			$stmt->close();
 			header("refresh: 0.25; view.php?eventID=$_GET[eventID]&username=$_GET[username]");
