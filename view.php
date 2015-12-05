@@ -27,19 +27,48 @@ if ($stmt = $mysqli->prepare("SELECT event_id, title, description, TIME_FORMAT(s
 	$stmt->close();
 }
 echo "</br>";
-if ($stmt = $mysqli->prepare("SELECT user_comment, username, ts FROM events natural join comments WHERE event_id = ? order by ts")){
-	$stmt->bind_param('i', $_GET['eventID']);
+if ($stmt = $mysqli->prepare("SELECT user_comment, username, DATE_FORMAT(ts, '%h:%i:%s %p %m-%d%-%y') FROM events natural join comments WHERE comments.event_id = ? order by ts")){
+	$stmt->bind_param('s', $_GET['eventID']);
+	$stmt->execute();
 	$stmt->store_result();
 	$stmt->bind_result($comment, $user, $ts);
-	if($stmt->num_rows == 0){
-		echo "This event has no comments </br></br>";
+	if($stmt->num_rows > 0){
+		echo "<hr>";
+		while($stmt->fetch()){
+			echo "<p>$user, $ts </p>";
+			echo "$comment </br></br>";
+			echo "<hr>";
+		}
+		
 	}
 	else{
-		while($stmt->fetch()){
-			echo "$user, $ts </br>";
-			echo "$comment </br></br>";
+		echo "This event has no comments </br></br>";
+	}
+	$stmt->close();
+}
+
+if(isset($_GET["username"])){
+	if(isset($_POST["comments"]) && !empty($_POST["comments"])){
+		if($stmt = $mysqli->prepare("INSERT INTO comments (event_id, username, user_comment) VALUES(?, ?, ?)")){
+			$stmt->bind_param('sss', $_GET['eventID'], $_GET['username'], $_POST['comments']);
+			$stmt->execute();
+			$stmt->close();
+			header("refresh: 0.25; view.php?eventID=$_GET[eventID]&username=$_GET[username]");
 		}
 	}
+
+	
+	$eventID = $_GET["eventID"];
+	$username = $_GET["username"];
+	echo "Enter your comment: <br /><br />\n";
+	echo "<form action='view.php?eventID=$eventID&username=$username' method='POST'>";
+	echo '<textarea name="comments" cols = 50 rows = 10> </textarea> </br>';
+	echo '<input type="submit" value="Comment" />';
+	echo '</form>';
+	
+}
+else{
+	echo "You are not logged in, please click <a href='login.php'> here </a> to log in so you can comment. </br>";
 }
 
 echo '<a href="index.php">Go back</a><br /><br />';
