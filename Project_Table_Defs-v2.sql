@@ -146,7 +146,6 @@ CREATE TABLE IF NOT EXISTS comments(
 	username varchar(20) NOT NULL,
 	user_comment varchar(500) NOT NULL,
 	ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (event_id, username),
 	FOREIGN KEY(event_id) REFERENCES events(event_id),
 	FOREIGN KEY(username) REFERENCES member(username)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
