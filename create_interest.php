@@ -25,10 +25,19 @@ if(isset($interest_name) && !empty($interest_name)){
 		$stmt->execute();
 		$stmt->bind_result($name);
 		if($stmt->fetch()){
-			echo "That interest already exists <br/>";
-			echo "You will be redirected in 3 seconds or click <a href=\"index.php\">here</a>.";
-			header("refresh: 3; index.php");
+			//echo "That interest already exists <br/>";
+			//echo "You will be redirected in 3 seconds or click <a href=\"index.php\">here</a>.";
+			//header("refresh: 3; index.php");
 			$stmt->close();
+			if($stmt = $mysqli->prepare("INSERT INTO interested_in (username, interest_name) VALUES(?, ?)")){
+				$user = $_GET['username'];
+				$stmt->bind_param('ss', $user, $interest_name);
+				$stmt->execute();
+				$stmt->close();
+				echo "This interest has been added to your personal interests, it already exists in the global interest </br>";
+				echo "Click <a href=\"index.php\">here</a> to return to homepage.";
+			}
+			else echo "error";
 		}
 		else{
 			$stmt->close();
@@ -36,7 +45,15 @@ if(isset($interest_name) && !empty($interest_name)){
 				$stmt->bind_param("s", $interest_name);
 				$stmt->execute();
 				$stmt->close();
-				echo "Succesfully added, click <a href=\"index.php\">here</a> to return to homepage.";
+				if($stmt = $mysqli->prepare("INSERT INTO interested_in (username, interest_name) VALUES(?, ?)")){
+					$user = $_GET["username"];
+					$stmt->bind_param('ss', $user, $interest_name);
+					if(!$stmt->execute()) echo "$stmt->error";
+					$stmt->close();
+					echo "This interest has been added to your personal interests and the global interests </br>";
+					echo "Click <a href=\"index.php\">here</a> to return to homepage.";
+				}
+				else echo "error";
 			}
 		}
 	}
@@ -47,8 +64,9 @@ if(isset($interest_name) && !empty($interest_name)){
 }
 
 else{
+	$username = $_GET["username"];
 	echo "Enter interest name below: <br /><br />\n";
-    echo '<form action="create_interest.php" method="POST">';
+    echo "<form action='create_interest.php?username=$username' method='POST'>";
     echo "\n";	
 	echo 'Interest Name: <input type="text" name="name" />';
 	echo '<span class = "error"> * ';

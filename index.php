@@ -36,7 +36,9 @@ else {
 	echo '">Create an event</a>';
 	echo "<br/><br/>";
 	
-	echo '<a href ="create_interest.php"> Create interest </a>'	;
+	echo '<a href ="create_interest.php?username=';
+	echo htmlspecialchars($_SESSION["username"]);
+	echo '">Create an interest</a>';
 	echo "<br/><br/>";
 	
 	echo '<a href ="create_group.php?username=';
