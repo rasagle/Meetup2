@@ -19,9 +19,8 @@ Choose a username<br>
 			echo "<option value='$interst_name'>$interest_name</option>\n";	
 		}
 		$stmt->close();
-		$mysqli->close();
 	}
-
+	$mysqli->close();
 	?>
 	
 	</select><input type = "submit" value = "Show info">

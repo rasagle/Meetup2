@@ -20,8 +20,8 @@
 		echo '</select><input type = "submit" value = "RSVP"></form></br>';
 		echo '<a href="index.php">Go back</a><br /><br />';
 		$stmt->close();
-		$mysqli->close();
 	}
+	$mysqli->close();
 	?>
 
 </body>

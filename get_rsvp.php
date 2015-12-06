@@ -25,6 +25,6 @@ else{
 	echo "You will be redirected in 3 seconds or click <a href=\"index.php\">here</a>.\n";
 	header("refresh: 3; index.php");
 }
+$mysqli->close();
 ?>
-
 </html>

@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-
 <html>
 <?php
-
 include "include.php";
 
 //perform SQL query
@@ -30,13 +28,12 @@ if(isset($_GET["interest_name"])) {
 		else{
 			echo "No group has this interest yet";
 		}
-        
         $stmt->close();
-		$mysqli->close();
     }
 }
 else {
     echo "Interest not set\n";
 }
+$mysqli->close();
 ?>
 </html>

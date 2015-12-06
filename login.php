@@ -54,9 +54,8 @@ else {
 				$_SESSION["zipcode"] = $zipcode;
 				*/
 				$_SESSION["REMOTE_ADDR"] = $_SERVER["REMOTE_ADDR"]; //store clients IP address to help prevent session hijack
-				echo "Login successful. \n";
-				echo "You will be redirected in 3 seconds or click <a href=\"index.php\">here</a>.";
-				header("refresh: 3; index.php");
+				echo "Login successful\n";
+				header("refresh: 1; index.php");
 			}
 			//if no match then tell them to try again
 			else {
@@ -64,7 +63,6 @@ else {
 				echo "Your username or password is incorrect, click <a href=\"login.php\">here</a> to try again.";
 			}
 			$stmt->close();
-			$mysqli->close();
 		}  
 	}
   //if not then display login form
@@ -92,6 +90,7 @@ else {
 		echo '<br /><a href="index.php">Go back</a>';
 	}	
 }
+$mysqli->close();
 ?>
 
 </html>

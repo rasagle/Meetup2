@@ -111,9 +111,8 @@ $mysqli->close();
 			echo "<option value='$interest_name'>$interest_name</option>\n";	
 		}
 		$stmt->close();
-		$mysqli->close();
 	}
-
+	$mysqli->close();
 	?>
 	
 	</select><input type = "submit" value = "Show groups with interest">

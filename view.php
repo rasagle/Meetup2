@@ -57,8 +57,6 @@ if(isset($_GET["username"])){
 			header("refresh: 0.25; view.php?eventID=$_GET[eventID]&username=$_GET[username]");
 		}
 	}
-
-	
 	$eventID = $_GET["eventID"];
 	$username = $_GET["username"];
 	echo "Enter your comment: <br /><br />\n";
@@ -71,11 +69,8 @@ if(isset($_GET["username"])){
 else{
 	echo "You are not logged in, please click <a href='login.php'> here </a> to log in so you can comment. </br>";
 }
-
 echo '<a href="index.php">Go back</a><br /><br />';
 echo "\n";
-
-
 $mysqli->close();
 ?>
 

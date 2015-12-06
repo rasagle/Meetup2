@@ -66,11 +66,9 @@ if(isset($group_name) && isset($group_desc) && isset($int_name) &&
 		echo"Did not create group <br/>";
 	}
 	
-	$mysqli->close();
 	echo "You have successfully created a group, you will be redirected in 3 seconds or click <a href=\"index.php\">here</a>.";
 	header("refresh: 3; index.php");
 }
-
 else{
 	$username = $_GET['username'];
 	echo "Enter your information below: <br /><br />\n";
@@ -95,7 +93,7 @@ else{
 	echo "\n";
 	echo '<br /><a href="index.php">Go back</a>';
 }
-
+$mysqli->close();
 ?>
 
 </html>

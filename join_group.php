@@ -8,9 +8,11 @@ if($stmt = $mysqli->prepare("INSERT INTO belongs_to VALUES(?, ?, ?)")){
 	$zero = 0;
 	$stmt->bind_param("ssi", $groupID, $user, $zero);
 	$stmt->execute();
+	$stmt->close();
 	echo "You have successfully joined this group </br>";
 	echo '<a href="index.php">Go back</a><br /><br />';
 }
+$mysqli->close();
 ?>
 
 </html>

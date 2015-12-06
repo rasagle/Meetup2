@@ -17,9 +17,7 @@ if($stmt = $mysqli->prepare("SELECT * FROM groups WHERE group_id = ?")){
 	echo "</table>";
 	$stmt->close();
 }
-
-
-
+$mysqli->close();
 ?>
 
 </html>

@@ -123,9 +123,5 @@ else {
 	}
 }
 $mysqli->close();
-
-
 ?>
-
-
 </html>

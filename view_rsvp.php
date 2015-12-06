@@ -28,13 +28,12 @@ if($stmt = $mysqli->prepare("SELECT event_id, title, description, TIME_FORMAT(st
 		echo "You did not RSVP for any events </br>";
 		echo '<a href="index.php">Go back</a><br /><br />';
 	}
-	
 	$stmt->close();
 }
 else{
 	echo "Some error has occured";
 }
-
+$mysqli->close();
 ?>
 
 </html>

@@ -136,6 +136,6 @@ else{
 	echo "\n";
 	echo '<br /><a href="index.php">Go back</a>';
 }
-
+$mysqli->close();
 ?>
 </html>

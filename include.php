@@ -1,6 +1,5 @@
 
 <?php
-
 $mysqli = new mysqli("localhost", "root", "", "meetup2");
 
 /* check connection */
@@ -15,5 +14,4 @@ if(isset($_SESSION["REMOTE_ADDR"]) && $_SESSION["REMOTE_ADDR"] != $_SERVER["REMO
   session_destroy();
   session_start();
 }
-
 ?>

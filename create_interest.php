@@ -57,12 +57,10 @@ if(isset($interest_name) && !empty($interest_name)){
 			}
 		}
 	}
-	
 	else{
 		echo "Something went wrong";
 	}
 }
-
 else{
 	$username = $_GET["username"];
 	echo "Enter interest name below: <br /><br />\n";
@@ -78,8 +76,6 @@ else{
 	echo "\n";
 	echo '<br /><a href="index.php">Go back</a>';
 }
-
-
-
+$mysqli->close();
 ?>
 </html>

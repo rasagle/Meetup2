@@ -13,9 +13,6 @@ function trim_input($data){
 	return $data;
 }
 
-$event_name = $desc = $start = $end = $street = $long = $lat = $city = $zip = $loc_name = "";
-$eventErr = $descErr = $startErr = $endErr = $streetErr = $longErr = $latErr = $cityErr = $zipErr = $locErr = "";
-
 // check if logged in and POST
 if (isset($_SESSION["username"])) {
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -62,5 +59,6 @@ if (isset($_SESSION["username"])) {
 	You will be redirected in 3 seconds or click <a href=\"index.php\">here</a>.\n";
 	header("refresh: 3; index.php");
 }
+$mysqli->close();
 ?>
 </html>

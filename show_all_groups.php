@@ -21,11 +21,10 @@ if($stmt = $mysqli->prepare("SELECT group_name, group_id
 	else{
 		echo "There are no groups that you are not in </br>";
 	}
+	$stmt->close();
 	echo '<a href="index.php">Go back</a><br /><br />';
 }
-
-
-
+$mysqli->close();
 ?>
 
 </html>

@@ -82,6 +82,7 @@ else{
 		}
 	}
 }
+$mysqli->close();
 ?>
 
 </html>
