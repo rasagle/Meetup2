@@ -14,37 +14,15 @@ if(!isset($_SESSION["username"])) {
 }
 else {
 	$username = htmlspecialchars($_SESSION["username"]);
-	echo "Welcome $username. You are logged in.<br /><br />\n";
-	 
-	echo '<a href="view_rsvp.php?username=';
-	echo htmlspecialchars($_SESSION["username"]);
-	echo '">View events you RSVP for</a>';
-	echo "<br/><br/>";
-	
-	
-	echo '<a href ="show_rsvp.php?username=';
-	echo htmlspecialchars($_SESSION["username"]);
-	echo '">RSVP for an event</a>';
-	echo "<br/><br/>";
-	
-	echo '<a href ="show_group_authorized.php?username=';
-	echo htmlspecialchars($_SESSION["username"]);
-	echo '">Create an event</a>';
-	echo "<br/><br/>";
-	
-	echo '<a href ="create_interest.php?username=';
-	echo htmlspecialchars($_SESSION["username"]);
-	echo '">Create an interest</a>';
-	echo "<br/><br/>";
-	
-	echo '<a href ="create_group.php?username=';
-	echo htmlspecialchars($_SESSION["username"]);
-	echo '">Create a group</a>';
-	echo "<br/><br/>";
-	
-	echo "<a href='show_events_rate.php?username=$username'>Rate an event</a></br></br>";
-	
-	echo "<a href='show_all_groups.php?username=$username'>Join a group</a></br></br>";
+	echo "Welcome $username<br/><br/>\n
+	<a href=\"view_rsvp.php?username=$username\">View events you RSVP for</a><br/><br/>\n
+	<a href=\"show_rsvp.php?username=$username\">RSVP for an event</a><br/><br/>\n
+	<a href=\"show_group_authorized.php?username=$username&type=0\">Create an event</a><br/><br/>\n
+	<a href=\"create_interest.php?username=$username\">Create an interest</a><br/><br/>\n
+	<a href=\"create_group.php?username=$username\">Create a group</a><br/><br/>\n
+	<a href=\"show_events_rate.php?username=$username\">Rate an event</a></br></br>\n
+	<a href=\"show_all_groups.php?username=$username\">Join a group</a></br></br>\n
+	<a href =\"show_group_authorized.php?username=$username&type=1\">Authorize user</a><br/><br/>\n";
 	
 	if($stmt = $mysqli->prepare("SELECT group_id, group_name 
 		FROM groups join belongs_to using (group_id)
@@ -64,12 +42,7 @@ else {
 		}
 	}
 	
-	echo '<a href="logout.php">logout</a>';
-	
-	echo "<br /><br />\n";
-
-	
-
+	echo "<a href=\"logout.php\">Logout</a><br/><br/>\n";
 }
 if ($stmt = $mysqli->prepare("SELECT title, event_id FROM events
 	WHERE start_time <= (CURDATE() + INTERVAL 30 DAY) and (start_time >= CURDATE()) order by title")) {
