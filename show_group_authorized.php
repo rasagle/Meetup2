@@ -35,6 +35,7 @@ if(isset($_GET["username"]) && isset($_GET["type"]) && $stmt = $mysqli->prepare(
 else{
 	echo "Some error has occurred";
 }
+echo '</br></br><a href="index.php">Go back</a><br /><br />';
 $mysqli->close();
 ?>
 </body>

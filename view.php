@@ -27,6 +27,26 @@ if ($stmt = $mysqli->prepare("SELECT event_id, title, description, TIME_FORMAT(s
 	$stmt->close();
 }
 echo "</br>";
+//show ratings
+if($stmt = $mysqli->prepare("SELECT AVG(rating) FROM attend WHERE event_id = ?")){
+	$stmt->bind_param('s', $_GET['eventID']);
+	$stmt->execute();
+	$stmt->store_result();
+	$stmt->bind_result($rating);
+	$stmt->fetch();
+	if($rating == NULL){
+		echo "<h4>There are no ratings for this event</h4>";
+	}
+	else if($stmt->num_rows > 0){
+		echo " <h4>Rating: $rating </h4>";
+	}
+	else{
+		echo "<h4>There are no ratings for this event</h4>";
+	}
+	$stmt->close();
+}
+else echo "something went wrong";
+//show comments
 if ($stmt = $mysqli->prepare("SELECT user_comment, username, DATE_FORMAT(ts, '%h:%i:%s %p %m-%d%-%y') FROM events natural join comments WHERE comments.event_id = ? order by ts")){
 	$stmt->bind_param('s', $_GET['eventID']);
 	$stmt->execute();
