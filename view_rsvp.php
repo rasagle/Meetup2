@@ -21,10 +21,12 @@ if($stmt = $mysqli->prepare("SELECT event_id, title, description, TIME_FORMAT(st
 			echo"<tr><td>$eId</td><td>$eName</td><td>$eDesc</td><td>$eStart</td>
 			<td>$eEnd</td><td>$date</td><td>$zipcode</td><td>$location_name</td></tr>";
 		}
-		echo "</table>";
+		echo "</table></br>";
+		echo '<a href="index.php">Go back</a><br /><br />';
 	}
 	else{
-		echo "You did not RSVP for any events";
+		echo "You did not RSVP for any events </br>";
+		echo '<a href="index.php">Go back</a><br /><br />';
 	}
 	
 	$stmt->close();

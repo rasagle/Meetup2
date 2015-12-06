@@ -76,7 +76,8 @@ else{
 			echo '<span class = "error"> * ';
 			echo "$ratingErr";
 			echo '</span> </br>';
-			echo '<input type = "submit" value = "Rate">';
+			echo '<input type = "submit" value = "Rate"> </br>';
+			echo '<a href="index.php">Go back</a><br /><br />';
 			$stmt->close();
 		}
 	}

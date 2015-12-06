@@ -19,7 +19,7 @@ if(isset($_GET["interest_name"])) {
 			echo "<table border = '1'>\n";
 			echo "<tr>";
 			echo "<th>Group Name </th><th>Group Description</th>";
-			echo "<tr>";
+			echo "</tr>";
 			while ($stmt->fetch()) {
 				echo "<tr>";
 				echo "<td>$group_name</td><td>$group_descrip</td>";

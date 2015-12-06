@@ -19,7 +19,8 @@ if($stmt = $mysqli->prepare("SELECT group_id, group_name
 			$groupName = htmlspecialchars($groupName);
 			echo "<option value='$groupID'>$groupName</option>\n";	
 		}
-		echo '</select><input type = "submit" value = "Create Event">';
+		echo '</select><input type = "submit" value = "Create Event"> </br>';
+		echo '<a href="index.php">Go back</a><br /><br />';
 		$stmt->close();
 	}
 	else{

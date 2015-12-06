@@ -18,10 +18,6 @@ else {
 	 
 	echo '<a href="view_rsvp.php?username=';
 	echo htmlspecialchars($_SESSION["username"]);
-	/*
-	echo '">View RSVP events</a>, or <a href="post.php">post on your blog</a>, or <a href="logout.php">logout</a>.';
-	echo "\n";
-	*/
 	echo '">View events you RSVP for</a>';
 	echo "<br/><br/>";
 	
@@ -48,10 +44,31 @@ else {
 	
 	echo "<a href='show_events_rate.php?username=$username'>Rate an event</a></br></br>";
 	
+	echo "<a href='show_all_groups.php?username=$username'>Join a group</a></br></br>";
+	
+	if($stmt = $mysqli->prepare("SELECT group_id, group_name 
+		FROM groups join belongs_to using (group_id)
+		WHERE belongs_to.username = ?")){
+		$stmt->bind_param("s", $username);
+		$stmt->execute();
+		$stmt->store_result();
+		$stmt->bind_result($gID, $gname);
+		if($stmt->num_rows > 0){
+			echo "<h4> Groups that you belong to </h4>";
+			while($stmt->fetch()){
+				echo "<a href='show_user_groups.php?group_id=$gID'> $gname </a> </br></br>";
+			}
+		}
+		else{
+			echo "You are not in any groups </br></br>";
+		}
+	}
+	
 	echo '<a href="logout.php">logout</a>';
 	
 	echo "<br /><br />\n";
 
+	
 
 }
 if ($stmt = $mysqli->prepare("SELECT title, event_id FROM events
@@ -62,13 +79,7 @@ if ($stmt = $mysqli->prepare("SELECT title, event_id FROM events
 	if($stmt->num_rows > 0){
 		echo "<h4>Events happening in the next 30 days: </h4>";
 		while ($stmt->fetch()) {
-			/*
-			$eventName = htmlspecialchars($eventName);
-			$info = (string)$eventID + '|' + htmlspecialchars($_SESSION["username"]);
-			echo '<a href="view.php?event_info=';
-			echo $info;
-			echo "\">$eventName</a><br />\n";
-			*/
+
 			if(isset($_SESSION["username"])){
 				$username = $_SESSION["username"];
 				echo "<a href='view.php?eventID=$eventID&username=$username'> $eventName </a> </br>";
@@ -83,12 +94,33 @@ if ($stmt = $mysqli->prepare("SELECT title, event_id FROM events
 	}
 	
 	$stmt->close();
-	$mysqli->close();
 }
 else{
 	echo "<h4>ERROR</h4>";
 }
 
+echo "<h4> Past Events: </h4>";
+if($stmt = $mysqli->prepare("SELECT title, event_id FROM events
+	WHERE end_time < CURDATE() order by title")){
+	$stmt->execute();
+	$stmt->store_result();
+	$stmt->bind_result($title, $eventID);
+	if($stmt->num_rows > 0){
+		while ($stmt->fetch()) {
+			if(isset($_SESSION["username"])){
+				$username = $_SESSION["username"];
+				echo "<a href='view.php?eventID=$eventID&username=$username'> $title </a> </br>";
+			}
+			else {
+				echo "<a href='view.php?eventID=$eventID'> $title </a> </br>";
+			}
+		}
+	}
+	else{
+		echo "There are no past events </br>";
+	}
+}
+$mysqli->close();
 ?>
 <br/>
 

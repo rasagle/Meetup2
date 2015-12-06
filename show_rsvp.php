@@ -17,11 +17,12 @@
 			$user_name = $_GET['username'];
 			echo "<option value='$event_id|$user_name'>$event_name</option>\n";	
 		}
+		echo '</select><input type = "submit" value = "RSVP"></form></br>';
+		echo '<a href="index.php">Go back</a><br /><br />';
 		$stmt->close();
 		$mysqli->close();
 	}
 	?>
-	</select><input type = "submit" value = "RSVP">
-</form>
+
 </body>
 </html>

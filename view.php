@@ -4,7 +4,7 @@
 <?php
 
 include ("include.php");
-
+echo '<a href="index.php">Go back</a><br /><br />';
 if ($stmt = $mysqli->prepare("SELECT event_id, title, description, TIME_FORMAT(start_time, '%h:%i %p'), TIME_FORMAT(end_time,'%h:%i %p'), DATE_FORMAT(start_time, '%m-%d-%Y')
 	FROM events WHERE event_id = ?")) {
 	$stmt->bind_param("s", $_GET["eventID"]);
