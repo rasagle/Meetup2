@@ -45,7 +45,9 @@ else {
 	echo htmlspecialchars($_SESSION["username"]);
 	echo '">Create a group</a>';
 	echo "<br/><br/>";
-	 
+	
+	echo "<a href='show_events_rate.php?username=$username'>Rate an event</a></br></br>";
+	
 	echo '<a href="logout.php">logout</a>';
 	
 	echo "<br /><br />\n";
